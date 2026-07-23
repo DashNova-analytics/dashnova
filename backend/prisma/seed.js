@@ -1,67 +1,40 @@
 import bcrypt from "bcryptjs";
-import db from "../src/config/prisma.js";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 async function main() {
-  const now = new Date();
-  const organizations = db.collection("Organization");
-  const users = db.collection("User");
-  const products = db.collection("Product");
-  const customers = db.collection("Customer");
+  const organization = await prisma.organization.upsert({
+    where: { name: "Default Organization" },
+    update: {},
+    create: { name: "Default Organization" },
+  });
 
-  const organization = await organizations.findOneAndUpdate(
-    { name: "Default Organization" },
-    {
-      $setOnInsert: {
-        name: "Default Organization",
-        createdAt: now,
-        updatedAt: now,
-      },
+  await prisma.user.upsert({
+    where: { email: "admin@example.com" },
+    update: {},
+    create: {
+      email: "admin@example.com",
+      name: "Admin User",
+      password: bcrypt.hashSync("password123", 10),
+      organizationId: organization.id,
     },
-    { upsert: true, returnDocument: "after" }
-  );
+  });
 
-  const adminEmail = "admin@example.com";
-  await users.updateOne(
-    { email: adminEmail },
-    {
-      $setOnInsert: {
-        email: adminEmail,
-        name: "Admin User",
-        password: bcrypt.hashSync("password123", 10),
-        organizationId: organization.value._id.toString(),
-        createdAt: now,
-        updatedAt: now,
-      },
-    },
-    { upsert: true }
-  );
-
-  const sampleProduct = await products.findOne({ name: "Sample Product", organizationId: organization.value._id.toString() });
-  if (!sampleProduct) {
-    await products.insertOne({
-      name: "Sample Product",
-      description: "Seed product",
-      price: 29.99,
-      organizationId: organization.value._id.toString(),
-      createdAt: now,
-      updatedAt: now,
+  const existingProduct = await prisma.product.findFirst({
+    where: { name: "Sample Product", organizationId: organization.id },
+  });
+  if (!existingProduct) {
+    await prisma.product.create({
+      data: { name: "Sample Product", description: "Seed product", price: 29.99, organizationId: organization.id },
     });
   }
 
-  await customers.updateOne(
-    { email: "customer@example.com" },
-    {
-      $setOnInsert: {
-        name: "Sample Customer",
-        email: "customer@example.com",
-        phone: "+1234567890",
-        organizationId: organization.value._id.toString(),
-        createdAt: now,
-        updatedAt: now,
-      },
-    },
-    { upsert: true }
-  );
+  await prisma.customer.upsert({
+    where: { email: "customer@example.com" },
+    update: {},
+    create: { name: "Sample Customer", email: "customer@example.com", phone: "+1234567890", organizationId: organization.id },
+  });
 }
 
 main()
@@ -69,5 +42,7 @@ main()
     console.error(error);
     process.exit(1);
   })
-  .finally(() => process.exit(0));
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
 

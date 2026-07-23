@@ -1,18 +1,10 @@
-import db from "../../config/prisma.js";
-import { mapDocuments } from "../../config/dbHelpers.js";
+import prisma from "../../config/prisma.js";
 
-export async function createProduct(data) {
-  const now = new Date();
-  const insertResult = await db.collection("Product").insertOne({
-    ...data,
-    createdAt: now,
-    updatedAt: now,
-  });
-  return mapDocuments([{ _id: insertResult.insertedId, ...data, createdAt: now, updatedAt: now }])[0];
+export function createProduct(data) {
+  return prisma.product.create({ data });
 }
 
-export async function listProducts() {
-  const products = await db.collection("Product").find().sort({ createdAt: -1 }).toArray();
-  return mapDocuments(products);
+export function listProducts() {
+  return prisma.product.findMany({ orderBy: { createdAt: "desc" } });
 }
 

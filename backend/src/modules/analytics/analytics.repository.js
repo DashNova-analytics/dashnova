@@ -1,10 +1,10 @@
-import db from "../../config/prisma.js";
+import prisma from "../../config/prisma.js";
 
 export async function getCounts() {
   return {
-    customerCount: await db.collection("Customer").countDocuments(),
-    productCount: await db.collection("Product").countDocuments(),
-    uploadCount: await db.collection("Upload").countDocuments(),
+    customerCount: await prisma.customer.count(),
+    productCount: await prisma.product.count(),
+    uploadCount: await prisma.upload.count(),
   };
 }
 

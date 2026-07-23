@@ -1,12 +1,12 @@
-import db from "../../config/prisma.js";
+import prisma from "../../config/prisma.js";
 
 export async function getSummary() {
   const [users, organizations, products, customers, uploads] = await Promise.all([
-    db.collection("User").countDocuments(),
-    db.collection("Organization").countDocuments(),
-    db.collection("Product").countDocuments(),
-    db.collection("Customer").countDocuments(),
-    db.collection("Upload").countDocuments(),
+    prisma.user.count(),
+    prisma.organization.count(),
+    prisma.product.count(),
+    prisma.customer.count(),
+    prisma.upload.count(),
   ]);
   return { users, organizations, products, customers, uploads };
 }
