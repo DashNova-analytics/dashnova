@@ -1,6 +1,6 @@
 # AI Analytics Backend
 
-This backend is designed to support the AI Analytics application with Prisma-powered persistence for users, organizations, uploads, products, and customers.
+This backend is designed to support the AI Analytics application with MongoDB persistence for users, organizations, uploads, products, and customers.
 
 ## Setup
 
@@ -10,14 +10,16 @@ This backend is designed to support the AI Analytics application with Prisma-pow
    npm install
    ```
 
-2. Generate Prisma client and run the migration:
+2. Configure MongoDB:
+   - Set `MONGODB_URI` in `backend/.env`
+   - Example: `mongodb://localhost:27017/ai-analytics`
+
+3. Seed the database:
    ```bash
-   npm run prisma:generate
-   npm run prisma:migrate
    npm run seed
    ```
 
-3. Start the server:
+4. Start the server:
    ```bash
    npm run dev
    ```

@@ -4,7 +4,7 @@ export const swaggerOptions = {
     info: {
       title: "AI Analytics Backend API",
       version: "1.0.0",
-      description: "Prisma-backed API for AI Analytics",
+      description: "MongoDB-backed API for AI Analytics",
     },
   },
 };
