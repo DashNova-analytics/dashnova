@@ -12,6 +12,10 @@ RUN cd frontend && npm install
 COPY . .
 
 RUN npx prisma generate --schema=backend/prisma/schema.prisma
+
+ARG VITE_CLERK_PUBLISHABLE_KEY
+ENV VITE_CLERK_PUBLISHABLE_KEY=$VITE_CLERK_PUBLISHABLE_KEY
+
 RUN cd frontend && npm run build
 
 # Stage 2 - Production
