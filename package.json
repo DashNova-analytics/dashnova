@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "npx prisma generate --schema=backend/prisma/schema.prisma && tsx server.js",
-    "build": "npx prisma generate --schema=backend/prisma/schema.prisma && cd frontend && npx vite build && cd .. && npx esbuild server.js --bundle --platform=node --format=cjs --packages=external --outfile=dist/server.cjs",
-    "start": "node dist/server.cjs",
+    "build": "npx prisma generate --schema=backend/prisma/schema.prisma && cd frontend && npx vite build && cd .. && npx esbuild server.js --bundle --platform=node --format=esm --packages=external --outfile=dist/server.cjs",
+    "start": "node server.js",
     "lint": "echo 'No lint required'"
   },
   "dependencies": {

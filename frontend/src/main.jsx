@@ -6,16 +6,19 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
 
-const clerkPubKey =
-  import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ||
-  "pk_test_a25vd24tY293LTU4LmNsZXJrLmFjY291bnRzLmRldiQ";
+const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+const appShell = (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={clerkPubKey}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ClerkProvider>
+    {clerkPubKey ? (
+      <ClerkProvider publishableKey={clerkPubKey}>{appShell}</ClerkProvider>
+    ) : (
+      appShell
+    )}
   </React.StrictMode>
 );
