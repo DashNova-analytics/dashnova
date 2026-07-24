@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  customers Customer[]
+  products  Product[]
+  sales     Sale[]
+  uploads   Upload[]
+  users     User[]
+}
+
+model User {
+  id             String        @id @default(cuid())
+  name           String?
+  email          String        @unique
+  password       String?
+  clerkUserId    String?       @unique
+  clerkId        String?       @unique
+  organizationId String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  uploads        Upload[]
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+}
+
+model Product {
+  id             String        @id @default(cuid())
+  sku            String?
+  name           String
+  category       String?
+  description    String?
+  price          Float
+  stock          Int?          @default(0)
+  soldCount      Int?          @default(0)
+  organizationId String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+}
+
+model Customer {
+  id             String        @id @default(cuid())
+  name           String
+  email          String        @unique
+  phone          String?
+  region         String?
+  sales          Float?        @default(0)
+  orders         Int?          @default(0)
+  status         String?       @default("Active")
+  organizationId String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+}
+
+model Sale {
+  id             String        @id @default(cuid())
+  productName    String?
+  amount         Float
+  channel        String?
+  region         String?
+  date           DateTime      @default(now())
+  organizationId String?
+  createdAt      DateTime      @default(now())
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+}
+
+model Upload {
+  id             String        @id @default(cuid())
+  filename       String
+  mimetype       String
+  size           Int
+  path           String
+  metadata       String?
+  userId         String?
+  organizationId String?
+  createdAt      DateTime      @default(now())
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  user           User?         @relation(fields: [userId], references: [id])
+}

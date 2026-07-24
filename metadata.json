@@ -1,0 +1,12 @@
+{
+  "name": "DashNova",
+  "description": "AI-Driven Decision Support & Business Intelligence Platform",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": [
+    "Real-time data analysis and visualization",
+    "AI-driven insights and recommendations",
+    "Customizable dashboards and reports",
+    "Integration with multiple data sources",
+    "Collaboration and sharing features"
+  ]
+}
