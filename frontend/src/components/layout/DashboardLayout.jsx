@@ -100,15 +100,17 @@ export default function DashboardLayout({ children }) {
       <aside
         className={`fixed inset-y-0 left-0 bg-gray-50 border-r border-gray-200 z-40 transition-all duration-200 flex flex-col
           ${mobileOpen ? 'translate-x-0 w-64 shadow-xl' : '-translate-x-full lg:translate-x-0'}
-          ${isCollapsed ? 'lg:w-[68px]' : 'lg:w-64'}
+          ${isCollapsed ? 'lg:w-17' : 'lg:w-64'}
         `}
       >
         {/* Sidebar Header */}
         <div className="h-16 border-b border-gray-200 px-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5 overflow-hidden">
-            <div className="w-8 h-8 bg-black rounded flex items-center justify-center shrink-0">
-              <div className="w-4 h-4 bg-white rotate-45" />
-            </div>
+            <img
+              src="/logo1.png"
+              alt="DashNova logo"
+              className="w-10 h-10 rounded object-cover shrink-0"
+            />
             {(!isCollapsed || mobileOpen) && (
               <span
                 onClick={() => {
@@ -322,10 +324,11 @@ export default function DashboardLayout({ children }) {
               {/* Brand */}
               <div className="md:col-span-2">
                 <div className="flex items-center gap-2.5">
-                  {/* Same logo mark as sidebar */}
-                  <div className="w-7 h-7 bg-black rounded flex items-center justify-center shrink-0">
-                    <div className="w-3.5 h-3.5 bg-white rotate-45" />
-                  </div>
+                  <img
+                    src="/Logo.png"
+                    alt="DashNova logo"
+                    className="w-7 h-7 rounded object-cover shrink-0"
+                  />
                   <div>
                     <h2 className="font-bold text-sm text-gray-900 tracking-tight">DashNova</h2>
                     <p className="text-[10px] text-gray-400 tracking-wide">Intelligence Beyond Dashboards</p>
