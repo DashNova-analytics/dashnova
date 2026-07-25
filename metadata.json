@@ -1,6 +1,41 @@
 {
   "name": "DashNova",
+  "title": "DashNova | AI-Powered Business Intelligence & Decision Support",
   "description": "AI-Driven Decision Support & Business Intelligence Platform",
+  "keywords": [
+    "Dashnova",
+    "dashnova",
+    "dashboard",
+    "analytics",
+    "dash",
+    "business intelligence",
+    "AI analytics",
+    "data visualization",
+    "decision support",
+    "real-time insights",
+    "dashboard software",
+    "forecasting",
+    "data collaboration"
+  ],
+  "canonicalUrl": "https://www.dashnova.in",
+  "author": "DashNova",
+  "titleImage": "https://www.dashnova.in/Logo.png",
+  "image": "https://www.dashnova.in/dashnova-og.png",
+  "icon": "https://www.dashnova.in/Logo.png",
+  "og": {
+    "title": "DashNova | AI-Powered Business Intelligence & Decision Support",
+    "description": "Unlock actionable insights with DashNova's AI-driven dashboards, forecasting, and collaboration tools.",
+    "type": "website",
+    "url": "https://www.dashnova.in",
+    "image": "https://www.dashnova.in/dashnova-og.png",
+    "imageAlt": "DashNova AI business intelligence platform"
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "site": "@dashnova",
+    "creator": "@dashnova",
+    "image": "https://www.dashnova.in/dashnova-og.png"
+  },
   "requestFramePermissions": ["microphone"],
   "majorCapabilities": [
     "Real-time data analysis and visualization",

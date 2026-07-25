@@ -18,7 +18,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     {clerkPubKey ? (
       <ClerkProvider publishableKey={clerkPubKey}>{appShell}</ClerkProvider>
     ) : (
-      appShell
+      <div className="min-h-screen bg-white flex items-center justify-center p-6 text-center">
+        <div>
+          <h1 className="text-2xl font-bold">Clerk configuration missing</h1>
+          <p className="mt-2 text-sm text-gray-600">
+            Set <code>VITE_CLERK_PUBLISHABLE_KEY</code> in your environment and restart the dev server.
+          </p>
+        </div>
+      </div>
     )}
   </React.StrictMode>
 );
