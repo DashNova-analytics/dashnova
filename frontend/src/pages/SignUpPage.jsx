@@ -8,10 +8,12 @@ export default function SignUpPage() {
   return (
     <div className="min-h-screen bg-white flex flex-col justify-center items-center p-6 font-sans antialiased">
       {/* Brand logo */}
-      <div className="mb-8 flex items-center gap-2.5">
-        <div className="w-7 h-7 rounded bg-black flex items-center justify-center text-white font-bold text-xs shrink-0">
-          D
-        </div>
+      <div className="mb-5 flex items-center">
+        <img
+          src="/logo1.png"
+          alt="DashNova logo"
+          className="w-10 h-10 rounded object-cover shrink-0"
+        />
         <span className="font-bold text-lg tracking-tight text-gray-950">DASHNOVA</span>
       </div>
 
